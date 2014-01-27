@@ -173,7 +173,7 @@ public function wp_head()
                 $css[] = 'line-height: 1.25 !important';
             }
             if (count($css)) {
-                printf('%s{%s}', $tag, join(';', $css).';');
+                printf('.hentry %s{%s}', $tag, join(';', $css).';');
             }
         }
         echo '</style>'."\n";

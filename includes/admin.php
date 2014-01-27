@@ -10,18 +10,18 @@
 	<div class="alpha">
 		<ul>
 			<li>
-				<select class="fontname" name="styles[<?php echo $tag; ?>][fontname]" data-tag="<?php echo $tag; ?>">
+				<select id="fontname-<?php echo $tag; ?>" class="fontname" name="styles[<?php echo $tag; ?>][fontname]" data-tag="<?php echo $tag; ?>">
 					<option value="">font-face ...</option>
 					<?php echo $this->get_font_selector($tag); ?>
 				</select>
 			</li>
 			<li>
-				<input type="text" name="styles[<?php echo $tag; ?>][font-size]"
-						value="<?php echo intval($this->get_style($tag, 'font-size')); ?>" size=4> px
+				<input id="font-size-<?php echo $tag; ?>" class="font-size" type="text" name="styles[<?php echo $tag; ?>][font-size]"
+						value="<?php $font_size = intval($this->get_style($tag, 'font-size')); if ($font_size) echo $font_size; ?>" size=4 data-tag="<?php echo $tag; ?>"> px
 			</li>
 		</ul>
 	</div>
-	<div class="beta">
+	<div class="beta" data-tag="<?php echo $tag; ?>">
 		<<?php echo $tag; ?>><?php echo $this->sample_text; ?></<?php echo $tag; ?>>
 	</div>
 </div>
