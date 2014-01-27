@@ -1,0 +1,40 @@
+$background-color: #ffffff;
+$wpadmin-break-point: 782px;
+#gmofontagent
+{
+	h3
+	{
+		border-bottom: 3px double #dedede;
+		padding: 5px;
+	}
+	.tag-block
+	{
+		margin-bottom: 2em;
+		overflow: auto;
+		.alpha
+		{
+			float: left;
+			margin-right: 20px;
+	        @media screen and (max-width: $wpadmin-break-point)
+	        {
+	            float: none;
+	            width: 100%;
+	            margin-bottom: 1em;
+	        }
+		}
+		.beta
+		{
+			background-color: $background-color;
+			border: 1px solid #dedede;
+			border-radius: 3px;
+			padding: 10px 20px;
+			line-height: 1.2 !important;
+			overflow: hidden;
+		}
+		h3
+		{
+			border: none;
+			padding: 0;
+		}
+	}
+}
