@@ -8,10 +8,18 @@
 <h3><?php echo $tag; ?></h3>
 <div id="tag-<?php echo $tag; ?>" class="tag-block">
 	<div class="alpha">
-		<select class="fontname" name="styles[<?php echo $tag; ?>][fontname]" data-tag="<?php echo $tag; ?>">
-			<option value="">font-face ...</option>
-			<?php echo $this->get_font_selector($tag); ?>
-		</select>
+		<ul>
+			<li>
+				<select class="fontname" name="styles[<?php echo $tag; ?>][fontname]" data-tag="<?php echo $tag; ?>">
+					<option value="">font-face ...</option>
+					<?php echo $this->get_font_selector($tag); ?>
+				</select>
+			</li>
+			<li>
+				<input type="text" name="styles[<?php echo $tag; ?>][font-size]"
+						value="<?php echo intval($this->get_style($tag, 'font-size')); ?>" size=4> px
+			</li>
+		</ul>
 	</div>
 	<div class="beta">
 		<<?php echo $tag; ?>><?php echo $this->sample_text; ?></<?php echo $tag; ?>>

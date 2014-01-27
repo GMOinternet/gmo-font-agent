@@ -164,8 +164,16 @@ public function wp_head()
         echo "<!-- GMO Font Agent-->\n";
         echo '<style type="text/css" media="screen">';
         foreach ($active_fonts as $tag => $style) {
+            $css = array();
             if (isset($style['fontname']) && $style['fontname']) {
-                printf('%s{font-family: %s !important;}', $tag, $fonts[$style['fontname']]['css']);
+                $css[] = sprintf('font-family: %s !important', $fonts[$style['fontname']]['css']);
+            }
+            if (isset($style['font-size']) && intval($style['font-size'])) {
+                $css[] = sprintf('font-size: %dpx !important', intval($style['font-size']));
+                $css[] = 'line-height: 1.25 !important';
+            }
+            if (count($css)) {
+                printf('%s{%s}', $tag, join(';', $css).';');
             }
         }
         echo '</style>'."\n";
@@ -219,15 +227,19 @@ public function options_page()
     require_once(dirname(__FILE__).'/includes/admin.php');
 }
 
-private function get_font_selector($tag)
+private function get_style($tag, $style)
 {
     $styles = get_option('gmofontagent-styles', array());
-    $active_fontname = '';
     if (isset($styles[$tag]) && $styles[$tag]) {
-        if (isset($styles[$tag]['fontname']) && $styles[$tag]['fontname']) {
-            $active_fontname = $styles[$tag]['fontname'];
+        if (isset($styles[$tag][$style]) && $styles[$tag][$style]) {
+            return $styles[$tag][$style];
         }
     }
+}
+
+private function get_font_selector($tag)
+{
+    $active_fontname = $this->get_style($tag, 'fontname');
     $options = array();
     foreach ($this->get_default_fonts() as $fontname => $meta) {
         if ($fontname === $active_fontname) {
