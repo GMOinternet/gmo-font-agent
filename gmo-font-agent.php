@@ -38,6 +38,8 @@ $gmofontagent->register();
 
 class GMOFontAgent {
 
+private $google_font_api = 'https://www.googleapis.com/webfonts/v1/webfonts?key=%s&sort=popularity';
+
 private $version       = '';
 private $langs         = '';
 private $default_tags  = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
@@ -137,10 +139,62 @@ public function plugins_loaded()
     add_action('admin_init', array($this, 'admin_init'));
     add_action('wp_enqueue_scripts', array($this, 'wp_enqueue_scripts'));
     add_action('wp_head', array($this, 'wp_head'));
+
+    add_shortcode('icon', array($this, 'icon'));
+
+    require_once(GMOFONTAGENT_PATH.'/includes/mceplugins.class.php');
+
+    new mcePlugins(
+        'iconfonts',
+        GMOFONTAGENT_URL.'/mce_plugins/plugins/iconfonts/editor_plugin.js',
+        GMOFONTAGENT_PATH.'/mce_plugins/plugins/iconfonts/langs/langs.php',
+        array($this, 'add_button'),
+        false
+    );
+}
+
+public function add_button($buttons){
+    array_unshift($buttons, '|');
+    array_unshift($buttons, 'iconfonts');
+    return $buttons;
+}
+
+public function icon($p, $content)
+{
+    if (isset($p['class']) && $p['class']) {
+        $icon = $p['class'];
+    } elseif (isset($p[0]) && $p[0]) {
+        $icon = $p[0];
+    } else {
+        $icon = '';
+    }
+
+    if (preg_match("/genericon/", $icon)) {
+        $icon = 'genericon '.$icon;
+    }
+
+    return sprintf(
+        '<span class="%s"></span>',
+        $icon
+    );
 }
 
 public function wp_enqueue_scripts()
 {
+    wp_enqueue_style(
+        'gmofontagent-genericons',
+        plugins_url("fonts/genericons/genericons.css", __FILE__),
+        array(),
+        $this->version,
+        'all'
+    );
+    wp_enqueue_style(
+        'gmofontagent-icomoon',
+        plugins_url("fonts/icomoon/style.css", __FILE__),
+        array(),
+        $this->version,
+        'all'
+    );
     $fonts = $this->get_default_fonts();
     foreach (get_option('gmofontagent-styles', array()) as $tag => $style) {
         if ($style['fontname']) {
@@ -183,6 +237,17 @@ public function wp_head()
 
 public function admin_enqueue_scripts()
 {
+    global $wp_scripts;
+
+    $ui = $wp_scripts->query('jquery-ui-core');
+
+    wp_enqueue_style(
+        'jquery-ui-smoothness',
+        "//ajax.googleapis.com/ajax/libs/jqueryui/{$ui->ver}/themes/smoothness/jquery-ui.min.css",
+        false,
+        null
+    );
+
     wp_enqueue_style(
         'gmo-font-agent-style',
         plugins_url('css/gmo-font-agent.min.css', __FILE__),
@@ -194,7 +259,7 @@ public function admin_enqueue_scripts()
     wp_enqueue_script(
         'gmo-font-agent-script',
         plugins_url('js/gmo-font-agent.min.js', __FILE__),
-        array('jquery'),
+        array('jquery-ui-tabs'),
         $this->version,
         true
     );
@@ -206,6 +271,11 @@ public function admin_init()
         if (check_admin_referer('gmofontagent', 'gmofontagent')){
             if (isset($_POST['styles']) && is_array($_POST['styles'])) {
                 update_option("gmofontagent-styles", $_POST['styles']);
+            }
+            if (isset($_POST['apikey']) && trim($_POST['apikey'])) {
+                update_option("gmofontagent-apikey", trim($_POST['apikey']));
+            } else {
+                update_option("gmofontagent-apikey", '');
             }
             wp_redirect('options-general.php?page=gmofontagent');
         }

@@ -1,5 +1,7 @@
 (function($){
 
+    $("#tabs").tabs();
+
     function set_style(tag) {
         /*global fonts */
         if ($('#fontname-'+tag).val() && fonts[$('#fontname-'+tag).val()]) {

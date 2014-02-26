@@ -1,0 +1,31 @@
+#source
+{
+}
+
+.btn
+{
+    width: 70px;
+}
+
+#tabs
+{
+    margin: 0.5em 0 0 0;
+    overflow: auto;
+}
+
+.icons
+{
+    float: left;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #dedede;
+    margin: 2px;
+}
+
+.icons span
+{
+    display: block;
+    line-height: 32px;
+    margin: 0 auto;
+}
+
