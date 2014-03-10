@@ -38,6 +38,135 @@ $gmofontagent->register();
 
 class GMOFontAgent {
 
+private $fonts = array(
+    'genericons' => array(
+        'genericon-standard',
+        'genericon-aside',
+        'genericon-image',
+        'genericon-gallery',
+        'genericon-video',
+        'genericon-status',
+        'genericon-quote',
+        'genericon-link',
+        'genericon-chat',
+        'genericon-audio',
+        'genericon-github',
+        'genericon-dribbble',
+        'genericon-twitter',
+        'genericon-facebook',
+        'genericon-facebook-alt',
+        'genericon-wordpress',
+        'genericon-googleplus',
+        'genericon-linkedin',
+        'genericon-linkedin-alt',
+        'genericon-pinterest',
+        'genericon-pinterest-alt',
+        'genericon-flickr',
+        'genericon-vimeo',
+        'genericon-youtube',
+        'genericon-tumblr',
+        'genericon-instagram',
+        'genericon-codepen',
+        'genericon-polldaddy',
+        'genericon-googleplus-alt',
+        'genericon-path',
+        'genericon-skype',
+        'genericon-digg',
+        'genericon-reddit',
+        'genericon-stumbleupon',
+        'genericon-pocket',
+        'genericon-dropbox',
+        'genericon-comment',
+        'genericon-category',
+        'genericon-tag',
+        'genericon-time',
+        'genericon-user',
+        'genericon-day',
+        'genericon-week',
+        'genericon-month',
+        'genericon-pinned',
+        'genericon-search',
+        'genericon-unzoom',
+        'genericon-zoom',
+        'genericon-show',
+        'genericon-hide',
+        'genericon-close',
+        'genericon-close-alt',
+        'genericon-trash',
+        'genericon-star',
+        'genericon-home',
+        'genericon-mail',
+        'genericon-edit',
+        'genericon-reply',
+        'genericon-feed',
+        'genericon-warning',
+        'genericon-share',
+        'genericon-attachment',
+        'genericon-location',
+        'genericon-checkmark',
+        'genericon-menu',
+        'genericon-refresh',
+        'genericon-minimize',
+        'genericon-maximize',
+        'genericon-404',
+        'genericon-spam',
+        'genericon-summary',
+        'genericon-cloud',
+        'genericon-key',
+        'genericon-dot',
+        'genericon-next',
+        'genericon-previous',
+        'genericon-expand',
+        'genericon-collapse',
+        'genericon-dropdown',
+        'genericon-dropdown-left',
+        'genericon-top',
+        'genericon-draggable',
+        'genericon-phone',
+        'genericon-send-to-phone',
+        'genericon-plugin',
+        'genericon-cloud-download',
+        'genericon-cloud-upload',
+        'genericon-external',
+        'genericon-document',
+        'genericon-book',
+        'genericon-cog',
+        'genericon-unapprove',
+        'genericon-cart',
+        'genericon-pause',
+        'genericon-stop',
+        'genericon-skip-back',
+        'genericon-skip-ahead',
+        'genericon-play',
+        'genericon-tablet',
+        'genericon-send-to-tablet',
+        'genericon-info',
+        'genericon-notice',
+        'genericon-help',
+        'genericon-fastforward',
+        'genericon-rewind',
+        'genericon-portfolio',
+        'genericon-heart',
+        'genericon-code',
+        'genericon-subscribe',
+        'genericon-unsubscribe',
+        'genericon-subscribed',
+        'genericon-reply-alt',
+        'genericon-reply-single',
+        'genericon-flag',
+        'genericon-print',
+        'genericon-lock',
+        'genericon-bold',
+        'genericon-italic',
+        'genericon-picture',
+        'genericon-fullscreen',
+        'genericon-uparrow',
+        'genericon-rightarrow',
+        'genericon-downarrow',
+        'genericon-leftarrow',
+    ),
+);
+
 private $google_font_api = 'https://www.googleapis.com/webfonts/v1/webfonts?key=%s&sort=popularity';
 
 private $version       = '';
@@ -140,17 +269,33 @@ public function plugins_loaded()
     add_action('wp_enqueue_scripts', array($this, 'wp_enqueue_scripts'));
     add_action('wp_head', array($this, 'wp_head'));
 
+    add_action("wp_ajax_tinymce_iconfonts_popup", array($this, "wp_ajax_tinymce_iconfonts_popup"));
+    add_action("wp_ajax_tinymce_iconfonts_script", array($this, "wp_ajax_tinymce_iconfonts_script"));
+
     add_shortcode('icon', array($this, 'icon'));
 
     require_once(GMOFONTAGENT_PATH.'/includes/mceplugins.class.php');
 
     new mcePlugins(
         'iconfonts',
-        GMOFONTAGENT_URL.'/mce_plugins/plugins/iconfonts/editor_plugin.js',
-        GMOFONTAGENT_PATH.'/mce_plugins/plugins/iconfonts/langs/langs.php',
+        admin_url('admin-ajax.php?action=tinymce_iconfonts_script'),
+        GMOFONTAGENT_PATH.'/languages/langs.php',
         array($this, 'add_button'),
         false
     );
+}
+
+public function wp_ajax_tinymce_iconfonts_script()
+{
+    header('Content-type: application/javascript; charset=utf-8');
+    require_once(dirname(__FILE__).'/includes/tinymce-iconfonts-script.js.php');
+}
+
+public function wp_ajax_tinymce_iconfonts_popup()
+{
+    header('Content-type: text/html; charset=utf-8');
+    require_once(dirname(__FILE__).'/includes/tinymce-iconfonts-popup.html.php');
+    exit;
 }
 
 public function add_button($buttons){
@@ -182,14 +327,14 @@ public function icon($p, $content)
 public function wp_enqueue_scripts()
 {
     wp_enqueue_style(
-        'gmofontagent-genericons',
+        'gmo-genericons',
         plugins_url("fonts/genericons/genericons.css", __FILE__),
         array(),
         $this->version,
         'all'
     );
     wp_enqueue_style(
-        'gmofontagent-icomoon',
+        'gmo-icomoon',
         plugins_url("fonts/icomoon/style.css", __FILE__),
         array(),
         $this->version,

@@ -20,6 +20,13 @@
     height: 32px;
     border: 1px solid #dedede;
     margin: 2px;
+    display: block;
+    cursor: pointer;
+}
+
+.icons.active
+{
+    border: 1px solid #ff0000;
 }
 
 .icons span
@@ -28,4 +35,6 @@
     line-height: 32px;
     margin: 0 auto;
 }
+
+
 
