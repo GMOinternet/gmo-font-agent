@@ -855,7 +855,7 @@ public function options_page()
             }
             set_transient('gmofontagent-fonts', $fonts, 86400);
         } else {
-            wp_die('Can not get json from Google Fonts API. Please reload.');
+            echo '<div class="error">Failed to load Google fonts API. Please check your API key or reload after few minutes.</div>';
         }
     }
 

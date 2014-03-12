@@ -48,7 +48,30 @@
     <table class="form-table">
         <tr>
             <th scope="row">Google Fonts API key</th>
-            <td><input type="text" name="apikey" value="<?php echo esc_attr(get_option('gmofontagent-apikey')); ?>"></td>
+            <td><input type="text" name="apikey" value="<?php echo esc_attr(get_option('gmofontagent-apikey')); ?>">
+
+<h4>To acquire an API key:</h4>
+
+<ol>
+  <li>Go to the <a href="https://cloud.google.com/console">Google Cloud Console</a>.</li>
+  <li>Select a project.</li>
+  <li>In the sidebar on the left, select <b>APIs &amp; auth</b>. 
+  
+    In the displayed list of APIs, make sure the Google Fonts Developer API status is set to <b>ON</b>.
+  
+</li>
+  <li>In the sidebar on the left, select <b>Registered apps</b>.</li>
+  <li>Select an application.</li>
+  <li>Expand the
+    
+      
+        Browser Key or Server Key sections.
+      
+    
+  </li>
+</ol>
+
+</td>
         </tr>
     </table>
 
