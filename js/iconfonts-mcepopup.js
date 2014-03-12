@@ -7,7 +7,7 @@ var iconfontsDialog = {
 			$('#tabs').append('<div id="'+name+'" class="tab"></div>');
 			$('#fonts').append('<option value="'+name+'">'+name+'</option>');
 			for (var j=0; j<icons[name].length; j++) {
-				var btn = $('<a class="icons" data-icon="'+icons[name][j]+'"></a>');
+				var btn = $('<a class="icons '+name+'" data-icon="'+icons[name][j]+'"></a>');
 				btn.append('<span class="genericon '+icons[name][j]+'"></span>');
 				$('#'+name).append(btn);
 				$(btn).click(function(){
@@ -17,7 +17,22 @@ var iconfontsDialog = {
 				});
 			}
 		}
+        this.hide();
+        var self = this;
+        $('#fonts').change(function(){
+            self.hide();
+        });
 	},
+
+    hide: function() {
+        $('a.icons').each(function(){
+            if (!$(this).hasClass($('#fonts').val())) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    },
 
 	resize : function() {
 		var h, e;

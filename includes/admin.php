@@ -21,9 +21,13 @@
         <div class="alpha">
             <ul>
                 <li>
+                    <select id="fontcat-<?php echo $tag; ?>" class="fontcat" name="styles[<?php echo $tag; ?>][fontcat]" data-tag="<?php echo $tag; ?>">
+                        <option value="">Select category ...</option>
+                    </select>
+                </li>
+                <li>
                     <select id="fontname-<?php echo $tag; ?>" class="fontname" name="styles[<?php echo $tag; ?>][fontname]" data-tag="<?php echo $tag; ?>">
-                        <option value="">font-face ...</option>
-                        <?php echo $this->get_font_selector($tag); ?>
+                        <option value="">Select font name ...</option>
                     </select>
                 </li>
                 <li>
@@ -60,5 +64,6 @@
 </div><!-- #gmofontagent -->
 
 <script type="text/javascript">
-var fonts = <?php echo json_encode($this->get_default_fonts()); ?>
+var url = '<?php echo admin_url('admin-ajax.php?action=fonts'); ?>';
+var settings = <?php echo json_encode(get_option('gmofontagent-styles', array())); ?>;
 </script>
