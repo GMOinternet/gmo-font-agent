@@ -745,7 +745,7 @@ public function wp_enqueue_scripts()
             $handle = 'gmofontagent-'.preg_replace("/[^a-z0-9]/", "-", strtolower($style['fontname']));
             wp_enqueue_style(
                 $handle,
-                'http://fonts.googleapis.com/css?family='.urlencode($style['fontname']),
+                '//fonts.googleapis.com/css?family='.urlencode($style['fontname']),
                 array(),
                 false,
                 "all"
