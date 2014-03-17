@@ -624,7 +624,7 @@ private $google_font_api = 'https://www.googleapis.com/webfonts/v1/webfonts?key=
 
 private $version       = '';
 private $langs         = '';
-private $default_tags  = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+private $default_tags  = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6', '.entry-content');
 private $sample_text   = "Grumpy wizards make toxic brew for the evil Queen and Jack.";
 
 function __construct()
@@ -798,13 +798,23 @@ public function admin_enqueue_scripts()
         'all'
     );
 
-    wp_enqueue_script(
-        'gmo-font-agent-script',
-        plugins_url('js/gmo-font-agent.min.js', __FILE__),
-        array('jquery-ui-tabs'),
-        $this->version,
-        true
-    );
+    if (defined("WP_DEBUG") && WP_DEBUG === true) {
+        wp_enqueue_script(
+            'gmo-font-agent-script',
+            plugins_url('js/gmo-font-agent.js', __FILE__),
+            array('jquery-ui-tabs'),
+            $this->version,
+            true
+        );
+    } else {
+        wp_enqueue_script(
+            'gmo-font-agent-script',
+            plugins_url('js/gmo-font-agent.min.js', __FILE__),
+            array('jquery-ui-tabs'),
+            $this->version,
+            true
+        );
+    }
 }
 
 public function admin_init()

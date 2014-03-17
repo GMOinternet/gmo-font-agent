@@ -25,33 +25,34 @@ $.getJSON(url, function(data){
 });
 
 function set_fonts(tag, cat, data) {
-    $('#fontname-'+tag).html('<option value="">Select font name ...</option>');
+    escaped_tag = tag.replace(/^(\.|\#)/, '_');
+    $('#fontname-'+escaped_tag).html('<option value="">Select font name ...</option>');
     for (var name in data[cat]) {
-        $('#fontname-'+tag).append($('<option value="'+name+'">'+name+'</option>'));
+        $('#fontname-'+escaped_tag).append($('<option value="'+name+'">'+name+'</option>'));
     }
-    $('#fontname-'+tag).val(settings[tag].fontname);
+    $('#fontname-'+escaped_tag).val(settings[tag].fontname);
 }
 
 function set_style(tag) {
-
-    if ($('#fontname-'+tag).val()) {
-        var fontname = $('#fontname-'+tag).val();
+     escaped_tag = tag.replace(/^(\.|\#)/, '_');
+    if ($('#fontname-'+escaped_tag).val()) {
+        var fontname = $('#fontname-'+escaped_tag).val();
         $("head").append("<link>");
         var css = $("head").children(":last");
         css.attr({
             rel: "stylesheet",
             type: "text/css",
-            href: 'http://fonts.googleapis.com/css?family='+encodeURI($('#fontname-'+tag).val())
+            href: 'http://fonts.googleapis.com/css?family='+encodeURI($('#fontname-'+escaped_tag).val())
         });
-        $('#tag-'+tag+' .beta '+tag).css('font-family', $('#fontname-'+tag).val());
+        $('#tag-'+escaped_tag+' .beta '+tag).css('font-family', $('#fontname-'+escaped_tag).val());
     } else {
-        $('#tag-'+tag+' .beta '+tag).css('font-family', "inherit");
+        $('#tag-'+escaped_tag+' .beta '+tag).css('font-family', "inherit");
     }
-    if ($('#font-size-'+tag).val()) {
-        $('#tag-'+tag+' .beta '+tag).css('font-size', $('#font-size-'+tag).val()+'px');
-        $('#tag-'+tag+' .beta '+tag).css('line-height', 1.25);
+    if ($('#font-size-'+escaped_tag).val()) {
+        $('#tag-'+escaped_tag+' .beta '+tag).css('font-size', $('#font-size-'+escaped_tag).val()+'px');
+        $('#tag-'+escaped_tag+' .beta '+tag).css('line-height', 1.25);
     } else {
-        $('#tag-'+tag+' .beta '+tag).css('font-size', "");
+        $('#tag-'+escaped_tag+' .beta '+tag).css('font-size', "");
     }
 }
 

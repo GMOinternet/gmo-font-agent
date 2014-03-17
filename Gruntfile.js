@@ -26,6 +26,8 @@ module.exports = function( grunt ) {
                 devel:   true,
                 jquery:  true,
         globals: {
+          url: true,
+          settings: true, 
           exports: true,
           module:  false
         }

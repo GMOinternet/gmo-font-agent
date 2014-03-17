@@ -17,27 +17,31 @@
 
     <?php foreach ($this->get_default_tags() as $tag): ?>
     <h3><?php echo $tag; ?></h3>
-    <div id="tag-<?php echo $tag; ?>" class="tag-block">
+    <div id="tag-<?php echo preg_replace("/^(\.|\#)/", "_", $tag); ?>" class="tag-block">
         <div class="alpha">
             <ul>
                 <li>
-                    <select id="fontcat-<?php echo $tag; ?>" class="fontcat" name="styles[<?php echo $tag; ?>][fontcat]" data-tag="<?php echo $tag; ?>">
+                    <select id="fontcat-<?php echo preg_replace("/^(\.|\#)/", "_", $tag); ?>" class="fontcat" name="styles[<?php echo $tag; ?>][fontcat]" data-tag="<?php echo $tag; ?>">
                         <option value="">Select category ...</option>
                     </select>
                 </li>
                 <li>
-                    <select id="fontname-<?php echo $tag; ?>" class="fontname" name="styles[<?php echo $tag; ?>][fontname]" data-tag="<?php echo $tag; ?>">
+                    <select id="fontname-<?php echo preg_replace("/^(\.|\#)/", "_", $tag); ?>" class="fontname" name="styles[<?php echo $tag; ?>][fontname]" data-tag="<?php echo $tag; ?>">
                         <option value="">Select font name ...</option>
                     </select>
                 </li>
                 <li>
-                    <input id="font-size-<?php echo $tag; ?>" class="font-size" type="text" name="styles[<?php echo $tag; ?>][font-size]"
+                    <input id="font-size-<?php echo preg_replace("/^(\.|\#)/", "_", $tag); ?>" class="font-size" type="text" name="styles[<?php echo $tag; ?>][font-size]"
                             value="<?php $font_size = intval($this->get_style($tag, 'font-size')); if ($font_size) echo $font_size; ?>" size=4 data-tag="<?php echo $tag; ?>"> px
                 </li>
             </ul>
         </div>
         <div class="beta" data-tag="<?php echo $tag; ?>">
+            <?php if (preg_match("/^\./", $tag)): ?>
+            <div class="<?php echo preg_replace("/^\./", "", $tag); ?>"><?php echo $this->sample_text; ?></<?php echo $tag; ?>>
+            <?php else: ?>
             <<?php echo $tag; ?>><?php echo $this->sample_text; ?></<?php echo $tag; ?>>
+            <?php endif; ?>
         </div>
     </div>
     <?php endforeach; ?>
