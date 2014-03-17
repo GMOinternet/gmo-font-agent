@@ -25,7 +25,7 @@ $.getJSON(url, function(data){
 });
 
 function set_fonts(tag, cat, data) {
-    escaped_tag = tag.replace(/^(\.|\#)/, '_');
+    var escaped_tag = tag.replace(/^(\.|\#)/, '_');
     $('#fontname-'+escaped_tag).html('<option value="">Select font name ...</option>');
     for (var name in data[cat]) {
         $('#fontname-'+escaped_tag).append($('<option value="'+name+'">'+name+'</option>'));
@@ -34,7 +34,7 @@ function set_fonts(tag, cat, data) {
 }
 
 function set_style(tag) {
-     escaped_tag = tag.replace(/^(\.|\#)/, '_');
+    var escaped_tag = tag.replace(/^(\.|\#)/, '_');
     if ($('#fontname-'+escaped_tag).val()) {
         var fontname = $('#fontname-'+escaped_tag).val();
         $("head").append("<link>");
