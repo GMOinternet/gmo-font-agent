@@ -44,6 +44,7 @@
             <?php endif; ?>
         </div>
     </div>
+<br clear="all" />
     <?php endforeach; ?>
 </div><!-- tabs-1 -->
 
