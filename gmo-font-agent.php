@@ -624,7 +624,7 @@ private $google_font_api = 'https://www.googleapis.com/webfonts/v1/webfonts?key=
 
 private $version       = '';
 private $langs         = '';
-private $default_tags  = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6', '.hentry');
+private $default_tags  = array('body', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', '.hentry');
 private $sample_text   = "Grumpy wizards make toxic brew for the evil Queen and Jack.";
 
 function __construct()
@@ -761,6 +761,7 @@ public function wp_head()
         echo "<!-- GMO Font Agent-->\n";
         echo '<style type="text/css" media="screen">';
         foreach ($active_fonts as $tag => $style) {
+            if ($tag === '.body') $tag = 'body';
             $css = array();
             if (isset($style['fontname']) && $style['fontname']) {
                 $css[] = sprintf("font-family: '%s' !important", $style['fontname']);

@@ -16,6 +16,7 @@
 <div id="tabs-1">
 
     <?php foreach ($this->get_default_tags() as $tag): ?>
+    <?php if ($tag === 'body') $tag = '.body'; ?>
     <h3><?php echo $tag; ?></h3>
     <div id="tag-<?php echo preg_replace("/^(\.|\#)/", "_", $tag); ?>" class="tag-block">
         <div class="alpha">
@@ -38,7 +39,7 @@
         </div>
         <div class="beta" data-tag="<?php echo $tag; ?>">
             <?php if (preg_match("/^\./", $tag)): ?>
-            <div class="<?php echo preg_replace("/^\./", "", $tag); ?>"><?php echo $this->sample_text; ?></<?php echo $tag; ?>>
+            <div class="<?php echo preg_replace("/^\./", "", $tag); ?>"><?php echo $this->sample_text; ?></div>
             <?php else: ?>
             <<?php echo $tag; ?>><?php echo $this->sample_text; ?></<?php echo $tag; ?>>
             <?php endif; ?>
@@ -60,19 +61,19 @@
 <ol>
   <li>Go to the <a href="https://cloud.google.com/console">Google Cloud Console</a>.</li>
   <li>Select a project.</li>
-  <li>In the sidebar on the left, select <b>APIs &amp; auth</b>. 
-  
+  <li>In the sidebar on the left, select <b>APIs &amp; auth</b>.
+
     In the displayed list of APIs, make sure the Google Fonts Developer API status is set to <b>ON</b>.
-  
+
 </li>
   <li>In the sidebar on the left, select <b>Registered apps</b>.</li>
   <li>Select an application.</li>
   <li>Expand the
-    
-      
+
+
         Browser Key or Server Key sections.
-      
-    
+
+
   </li>
 </ol>
 
