@@ -623,8 +623,20 @@ private $fonts = array(
 private $google_font_api = 'https://www.googleapis.com/webfonts/v1/webfonts?key=%s&sort=popularity';
 
 private $version       = '';
+
 private $langs         = '';
-private $default_tags  = array('body', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', '.hentry');
+
+private $default_tags  = array(
+    'body'    => 'Body',
+    'h1'      => 'Heading 1',
+    'h2'      => 'Heading 2',
+    'h3'      => 'Heading 3',
+    'h4'      => 'Heading 4',
+    'h5'      => 'Heading 5',
+    'h6'      => 'Heading 6',
+    '.hentry' => 'Contents',
+);
+
 private $sample_text   = "Grumpy wizards make toxic brew for the evil Queen and Jack.";
 
 function __construct()

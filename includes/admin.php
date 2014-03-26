@@ -15,12 +15,12 @@
 
 <div id="tabs-1">
 
-    <?php foreach ($this->get_default_tags() as $tag): ?>
+    <?php foreach ($this->get_default_tags() as $tag => $caption): ?>
     <?php if ($tag === 'body') $tag = '.body'; ?>
     <?php if ($tag === '.body'): ?>
     <h3>body</h3>
     <?php else: ?>
-    <h3><?php echo $tag; ?></h3>
+    <h3><?php echo esc_html($caption); ?></h3>
     <?php endif; ?>
     <div id="tag-<?php echo preg_replace("/^(\.|\#)/", "_", $tag); ?>" class="tag-block">
         <div class="alpha">
