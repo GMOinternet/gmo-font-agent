@@ -671,7 +671,7 @@ public function plugins_loaded()
     new mcePlugins(
         'iconfonts',
         admin_url('admin-ajax.php?action=tinymce_iconfonts_script'),
-        GMOFONTAGENT_PATH.'/languages/langs.php',
+        '',
         array($this, 'add_button'),
         false
     );
