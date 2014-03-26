@@ -664,6 +664,8 @@ public function plugins_loaded()
     add_action("wp_ajax_tinymce_iconfonts_script", array($this, "wp_ajax_tinymce_iconfonts_script"));
     add_action("wp_ajax_fonts", array($this, "wp_ajax_fonts"));
 
+    add_post_type_support('page', 'excerpt');
+
     add_shortcode('icon', array($this, 'icon'));
 
     require_once(GMOFONTAGENT_PATH.'/includes/mceplugins.class.php');
