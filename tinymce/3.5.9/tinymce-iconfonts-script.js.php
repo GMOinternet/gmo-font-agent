@@ -22,7 +22,7 @@
 
             // Register buttons
             ed.addButton('iconfonts', {
-                title : 'iconfonts_dlg.desc',
+                title : '<?php _e('Iconfonts by GMO Font Agent', 'gmofontagent'); ?>',
                 cmd : 'mceIconfonts',
                 image : '<?php echo GMOFONTAGENT_URL."/img/tinymce-icon.png";?>'
             });

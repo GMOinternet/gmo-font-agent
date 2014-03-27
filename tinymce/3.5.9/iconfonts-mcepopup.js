@@ -1,5 +1,3 @@
-tinyMCEPopup.requireLangPack();
-
 var iconfontsDialog = {
 	init : function() {
 		this.resize();

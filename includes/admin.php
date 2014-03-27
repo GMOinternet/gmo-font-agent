@@ -10,7 +10,7 @@
 
 <ul>
     <li><a href="#tabs-1">Font Settings</a></li>
-    <li><a href="#tabs-2">General Settings</a></li>
+    <li><a href="#tabs-2">Google Fonts API key</a></li>
 </ul>
 
 <div id="tabs-1">

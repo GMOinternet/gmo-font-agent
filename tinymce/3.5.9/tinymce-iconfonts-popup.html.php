@@ -28,6 +28,6 @@ var icons = <?php echo json_encode($this->fonts); ?>
 </div><!-- #wrap -->
     <script type="text/javascript" src="<?php echo includes_url('js/tinymce/tiny_mce_popup.js'); ?>"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="<?php echo GMOFONTAGENT_URL.'/js/iconfonts-mcepopup.js'; ?>"></script>
+    <script src="<?php echo GMOFONTAGENT_URL.'/tinymce/3.5.9/iconfonts-mcepopup.js'; ?>"></script>
 </body>
 </html>

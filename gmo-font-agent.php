@@ -701,14 +701,22 @@ public function wp_ajax_fonts()
 
 public function wp_ajax_tinymce_iconfonts_script()
 {
+    global $wp_version;
     header('Content-type: application/javascript; charset=utf-8');
-    require_once(dirname(__FILE__).'/includes/tinymce-iconfonts-script.js.php');
+    if (!(version_compare($wp_version, "3.8.1") <= 0)) {
+    } else {
+        require_once(dirname(__FILE__).'/tinymce/3.5.9/tinymce-iconfonts-script.js.php');
+    }
 }
 
 public function wp_ajax_tinymce_iconfonts_popup()
 {
+    global $wp_version;
     header('Content-type: text/html; charset=utf-8');
-    require_once(dirname(__FILE__).'/includes/tinymce-iconfonts-popup.html.php');
+    if (!(version_compare($wp_version, "3.8.1") <= 0)) {
+    } else {
+        require_once(dirname(__FILE__).'/tinymce/3.5.9/tinymce-iconfonts-popup.html.php');
+    }
     exit;
 }
 
@@ -851,6 +859,10 @@ public function admin_init()
 
 public function admin_menu()
 {
+    if (!get_option('gmofontagent-apikey')) {
+        add_action("admin_notices", array($this, 'admin_notices'));
+    }
+
     add_options_page(
         __('GMO Font Agent', 'gmofontagent'),
         __('GMO Font Agent', 'gmofontagent'),
@@ -858,6 +870,15 @@ public function admin_menu()
         'gmofontagent',
         array($this, 'options_page')
     );
+}
+
+function admin_notices()
+{
+?>
+    <div class="error">
+        <p><a href="<?php echo admin_url("options-general.php?page=gmofontagent#tabs-2"); ?>"><?php _e( 'Please activate your Google Fonts API key!', 'gmofontagent' ); ?></a></p>
+    </div>
+<?php
 }
 
 public function options_page()

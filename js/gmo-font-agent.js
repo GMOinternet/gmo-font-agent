@@ -3,7 +3,6 @@
 $("#tabs").tabs();
 
 $.getJSON(url, function(data){
-
     $('.fontcat').each(function(){
         for (var category in data) {
             $(this).append($('<option value="'+category+'">'+category+'</option>'));
@@ -14,7 +13,9 @@ $.getJSON(url, function(data){
             set_fonts(tag, cat, data);
         });
         var tag = $(this).attr('data-tag');
-        $(this).val(settings[tag].fontcat);
+        if (settings[tag] && settings[tag].fontcat) {
+            $(this).val(settings[tag].fontcat);
+        }
         set_fonts(tag, $(this).val(), data);
     });
 
@@ -30,7 +31,10 @@ function set_fonts(tag, cat, data) {
     for (var name in data[cat]) {
         $('#fontname-'+escaped_tag).append($('<option value="'+name+'">'+name+'</option>'));
     }
-    $('#fontname-'+escaped_tag).val(settings[tag].fontname);
+
+    if (settings[tag] && settings[tag].fontcat) {
+        $('#fontname-'+escaped_tag).val(settings[tag].fontname);
+    }
 }
 
 function set_style(tag) {
