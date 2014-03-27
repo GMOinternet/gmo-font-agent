@@ -25,9 +25,9 @@ var iconfontsDialog = {
     hide: function() {
         $('a.icons').each(function(){
             if (!$(this).hasClass($('#fonts').val())) {
-                $(this).show();
-            } else {
                 $(this).hide();
+            } else {
+                $(this).show();
             }
         });
     },
