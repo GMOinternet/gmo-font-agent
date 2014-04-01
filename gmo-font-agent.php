@@ -704,6 +704,7 @@ public function wp_ajax_tinymce_iconfonts_script()
     global $wp_version;
     header('Content-type: application/javascript; charset=utf-8');
     if (!(version_compare($wp_version, "3.8.1") <= 0)) {
+        require_once(dirname(__FILE__).'/tinymce/4.0.20/tinymce-iconfonts-script.js.php');
     } else {
         require_once(dirname(__FILE__).'/tinymce/3.5.9/tinymce-iconfonts-script.js.php');
     }
@@ -714,6 +715,7 @@ public function wp_ajax_tinymce_iconfonts_popup()
     global $wp_version;
     header('Content-type: text/html; charset=utf-8');
     if (!(version_compare($wp_version, "3.8.1") <= 0)) {
+        require_once(dirname(__FILE__).'/tinymce/4.0.20/tinymce-iconfonts-popup.html.php');
     } else {
         require_once(dirname(__FILE__).'/tinymce/3.5.9/tinymce-iconfonts-popup.html.php');
     }
@@ -802,6 +804,11 @@ public function wp_head()
 
 public function admin_enqueue_scripts()
 {
+    $screen = get_current_screen();
+    if ($screen->base !== 'settings_page_gmofontagent') {
+        return;
+    }
+
     global $wp_scripts;
 
     $ui = $wp_scripts->query('jquery-ui-core');
