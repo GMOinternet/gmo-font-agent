@@ -792,7 +792,7 @@ public function wp_head()
             }
             if (isset($style['font-size']) && intval($style['font-size'])) {
                 $css[] = sprintf('font-size: %dpx !important', intval($style['font-size']));
-                $css[] = 'line-height: 1.25 !important';
+                //$css[] = 'line-height: 1.25 !important';
             }
             if (count($css)) {
                 printf('%s{%s}', $tag, join(';', $css).';');
