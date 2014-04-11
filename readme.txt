@@ -1,18 +1,18 @@
 === GMO Font Agent ===
-Contributors:      megumithemes
-Donate link:       https://digitalcube.jp/
+Contributors:      takeaki-nagashima
+Donate link:       
 Tags:
 Requires at least: 3.8
 Tested up to:      3.8
-Stable tag:        0.1.0
+Stable tag:        1.0
 License:           GPLv2
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
-This is a awesome cool plugin.
+GMO Font Agent plugin is tied up with Google fonts, gives you a choice to use variety of stylish web fonts.
 
 == Description ==
 
-
+GMO Font Agent plugin is tied up with Google fonts, gives you a choice to use variety of stylish web fonts. The plugin is genericon and IcoMoon compatible, to enhance its usability. It can be inserted from the post editor. This is simply a plug and play for everyone.
 
 == Installation ==
 
@@ -29,10 +29,10 @@ This is a awesome cool plugin.
 
 == Changelog ==
 
-= 0.1.0 =
+= 1.0 =
 * First release
 
 == Upgrade Notice ==
 
-= 0.1.0 =
+= 1.0 =
 First Release
